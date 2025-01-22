@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}Notebook{% endblock %}
+{% block content %}
+<h1 align="center">Notebook</h1>
+<br />
+<!-- making a resizable  -->
+<ul class="list-group list-group-flush" id="notes">
+    {% for note in user.notes %}
+    <li class="list-group-item">
+        <!-- Display note data -->
+        {{ note.data }}
+        <!-- Button to delete the note which will be in the corner of the displayed note-->
+        <button type="button" class="close"
+            onclick="deleteNote('{{ note.id }}')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </li>
+    {% endfor %}
+</ul>
+<!-- Another Form that will allow users to add a new note -->
+<form method="POST" onsubmit="addNote(); return false;">
+    <textarea name="note" id="note" class="form-control"></textarea>
+    <br />
+    <div align="center">
+        <!-- a button that will submit the note to the database for storage and move the user to make a new note-->
+        <button type="submit" class="btn btn-outline-dark">Add Note</button>
+    </div>
+</form>
+{% endblock %}
